@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chi Tiết Đơn Hàng | RAINBUSHOP</title>
+  
+  <!-- Google Fonts: Be Vietnam Pro -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* Dedicated Order Detail Page Styles */
+    :root {
+      --primary-orange: #e53935;
+      --primary-dark: #c62828;
+      --bg-page: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border-soft: #e2e8f0;
+      --success-green: #10b981;
+      --blue-accent: #2563eb;
+      --danger-red: #ef4444;
+      --radius-card: 16px;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 20px -2px rgba(15, 23, 42, 0.08);
+    }
+
+    body {
+      background-color: var(--bg-page);
+      font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text-main);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Navbar */
+    .order-page-navbar {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-soft);
+      padding: 14px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .brand-logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+
+    .brand-logo-ball {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #f97316, #ea580c);
+      color: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      box-shadow: 0 4px 10px rgba(249, 115, 22, 0.35);
+    }
+
+    .brand-name {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #0f172a;
+    }
+
+    .brand-name span {
+      color: var(--primary-orange);
+    }
+
+    .nav-action-buttons {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .nav-btn-outline {
+      background: #ffffff;
+      border-color: var(--border-soft);
+      color: #334155;
+    }
+
+    .nav-btn-outline:hover {
+      background: #f1f5f9;
+      color: #0f172a;
+      border-color: #cbd5e1;
+    }
+
+    .nav-btn-primary {
+      background: var(--primary-orange);
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(249, 115, 22, 0.25);
+    }
+
+    .nav-btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .nav-btn-admin {
+      background: #1e293b;
+      color: #ffffff;
+    }
+
+    .nav-btn-admin:hover {
+      background: #0f172a;
+    }
+
+    /* Main Container */
+    .order-detail-page-container {
+      max-width: 1100px;
+      margin: 28px auto 60px;
+      padding: 0 20px;
+      width: 100%;
+      box-sizing: border-box;
+      flex: 1;
+    }
+
+    /* Breadcrumbs */
+    .breadcrumb-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .breadcrumb-bar a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .breadcrumb-bar a:hover {
+      color: var(--primary-orange);
+    }
+
+    .breadcrumb-separator {
+      color: #cbd5e1;
+    }
+
+    /* Alert Success Banner */
+    .placed-success-alert {
+      background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+      border: 1px solid #a7f3d0;
+      color: #065f46;
+      border-radius: var(--radius-card);
+      padding: 18px 24px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .placed-success-icon {
+      font-size: 32px;
+      line-height: 1;
+    }
+
+    .placed-success-text h3 {
+      margin: 0 0 4px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #047857;
+    }
+
+    .placed-success-text p {
+      margin: 0;
+      font-size: 14px;
+      color: #065f46;
+    }
+
+    /* Main Header Card */
+    .order-hero-card {
+      background: #ffffff;
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-soft);
+      padding: 24px 28px;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .order-hero-left h1 {
+      margin: 0 0 8px;
+      font-size: 24px;
+      font-weight: 800;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .order-hero-code {
+      color: var(--primary-orange);
+      font-family: monospace, monospace;
+      font-size: 22px;
+    }
+
+    .order-hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 14px;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+    }
+
+    .order-hero-meta-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .order-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .status-badge-unconfirmed {
+      background: #fef3c7;
+      color: #b45309;
+      border: 1px solid #fde68a;
+    }
+
+    .status-badge-confirmed {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+    }
+
+    .status-badge-shipping {
+      background: #f3e8ff;
+      color: #7e22ce;
+      border: 1px solid #e9d5ff;
+    }
+
+    .status-badge-delivered {
+      background: #ecfdf5;
+      color: #047857;
+      border: 1px solid #a7f3d0;
+    }
+
+    .status-badge-cancelled {
+      background: #fef2f2;
+      color: #b91c1c;
+      border: 1px solid #fecaca;
+    }
+
+    /* Admin Action Controls */
+    .admin-status-control-box {
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 12px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .admin-status-control-box label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #334155;
+    }
+
+    .admin-status-control-box select {
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      font-size: 13px;
+      font-weight: 600;
+      background: #ffffff;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .admin-status-control-box button {
+      padding: 8px 16px;
+      background: #2563eb;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .admin-status-control-box button:hover {
+      background: #1d4ed8;
+    }
+
+    /* Order Progress Tracker (Stepper) */
+    .order-tracker-card {
+      background: #ffffff;
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-soft);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 24px;
+    }
+
+    .tracker-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1e293b;
+      margin: 0 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .stepper-track {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      margin: 10px 0 0;
+    }
+
+    .stepper-track::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 30px;
+      right: 30px;
+      height: 4px;
+      background: #e2e8f0;
+      z-index: 1;
+    }
+
+    .stepper-track-progress {
+      position: absolute;
+      top: 20px;
+      left: 30px;
+      height: 4px;
+      background: var(--primary-orange);
+      z-index: 2;
+      transition: width 0.4s ease;
+    }
+
+    .stepper-step {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      flex: 1;
+    }
+
+    .step-circle {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 3px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: #94a3b8;
+      font-weight: 700;
+      margin-bottom: 8px;
+      transition: all 0.3s;
+    }
+
+    .stepper-step.completed .step-circle {
+      background: var(--primary-orange);
+      border-color: var(--primary-orange);
+      color: #ffffff;
+    }
+
+    .stepper-step.active .step-circle {
+      border-color: var(--primary-orange);
+      color: var(--primary-orange);
+      box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.2);
+    }
+
+    .stepper-step.cancelled .step-circle {
+      background: var(--danger-red);
+      border-color: var(--danger-red);
+      color: #ffffff;
+    }
+
+    .step-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #64748b;
+    }
+
+    .stepper-step.completed .step-label,
+    .stepper-step.active .step-label {
+      color: #0f172a;
+      font-weight: 700;
+    }
+
+    .stepper-step.cancelled .step-label {
+      color: var(--danger-red);
+      font-weight: 700;
+    }
+
+    /* 3-Column Info Cards Grid */
+    .order-info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .info-card {
+      background: #ffffff;
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-soft);
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .info-card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .info-card-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: #fff7ed;
+      color: var(--primary-orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .info-card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0f172a;
+      margin: 0;
+    }
+
+    .info-field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .info-field-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      font-size: 13px;
+      gap: 10px;
+    }
+
+    .info-label {
+      color: var(--text-muted);
+      font-weight: 500;
+      min-width: 100px;
+    }
+
+    .info-value {
+      color: #0f172a;
+      font-weight: 600;
+      text-align: right;
+      word-break: break-word;
+    }
+
+    /* Products Items Table */
+    .order-items-card {
+      background: #ffffff;
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .order-items-card-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border-soft);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .order-items-card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0f172a;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .items-count-badge {
+      font-size: 12px;
+      background: #f1f5f9;
+      color: #475569;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      font-weight: 600;
+    }
+
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .order-items-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    .order-items-table th {
+      background: #f8fafc;
+      color: #475569;
+      font-weight: 700;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .order-items-table td {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-soft);
+      vertical-align: middle;
+    }
+
+    .order-items-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .item-product-flex {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .item-thumbnail {
+      width: 58px;
+      height: 58px;
+      border-radius: 8px;
+      object-fit: cover;
+      background: #f1f5f9;
+      border: 1px solid var(--border-soft);
+      flex-shrink: 0;
+    }
+
+    .item-info-text {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .item-name {
+      font-weight: 700;
+      color: #0f172a;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .item-meta {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .size-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      background: #f1f5f9;
+      color: #334155;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 12px;
+      border: 1px solid #cbd5e1;
+    }
+
+    /* Financial Summary Card */
+    .order-financial-card {
+      background: #ffffff;
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-soft);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      margin-left: auto;
+      max-width: 440px;
+    }
+
+    .financial-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      font-size: 14px;
+      color: #475569;
+    }
+
+    .financial-row.total-row {
+      border-top: 2px dashed var(--border-soft);
+      margin-top: 10px;
+      padding-top: 16px;
+      font-size: 18px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .total-amount-highlight {
+      color: #e11d48;
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    /* Empty state */
+    .empty-order-box {
+      background: #ffffff;
+      border-radius: var(--radius-card);
+      padding: 60px 20px;
+      text-align: center;
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .empty-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+
+    .empty-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 8px;
+    }
+
+    .empty-desc {
+      color: var(--text-muted);
+      font-size: 14px;
+      max-width: 400px;
+      margin: 0 auto 24px;
+    }
+
+    /* Page Footer */
+    .order-page-footer {
+      background: #ffffff;
+      border-top: 1px solid var(--border-soft);
+      padding: 20px 0;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: auto;
+    }
+
+    /* Toast */
+    .toast-box {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #1e293b;
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+
+    .toast-box.show {
+      opacity: 1;
+    }
+
+    /* Print styling */
+    @media print {
+      .order-page-navbar,
+      .breadcrumb-bar,
+      .placed-success-alert,
+      .admin-status-control-box,
+      .nav-action-buttons,
+      .order-page-footer {
+        display: none !important;
+      }
+
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+      }
+
+      .order-detail-page-container {
+        margin: 0 !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+      }
+
+      .order-hero-card,
+      .order-tracker-card,
+      .info-card,
+      .order-items-card,
+      .order-financial-card {
+        box-shadow: none !important;
+        border: 1px solid #cccccc !important;
+        break-inside: avoid;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .order-hero-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .stepper-track {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .stepper-track::before,
+      .stepper-track-progress {
+        display: none;
+      }
+
+      .stepper-step {
+        flex-direction: row;
+        gap: 12px;
+        text-align: left;
+      }
+
+      .order-financial-card {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <header class="order-page-navbar">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo-wrap" title="Về trang chủ RainbuShop">
+        <div class="brand-logo-ball">🏀</div>
+        <div class="brand-name">RAINBU<span>SHOP</span></div>
+      </a>
+
+      <div class="nav-action-buttons">
+        <a href="index.html" class="nav-btn nav-btn-outline" id="btn-back-home">
+          <span>🏠</span>
+          <span>Trang Chủ</span>
+        </a>
+        <a href="index.html" class="nav-btn nav-btn-primary" id="btn-back-shop">
+          <span>🛍️</span>
+          <span>Tiếp Tục Mua Sắm</span>
+        </a>
+        <a href="admin.html" class="nav-btn nav-btn-admin" id="btn-nav-admin" style="display: none;">
+          <span>⚙️</span>
+          <span>Quản Trị (Admin)</span>
+        </a>
+        <button type="button" class="nav-btn nav-btn-outline" onclick="window.print()" title="In hóa đơn đơn hàng">
+          <span>🖨️</span>
+          <span>In Hóa Đơn</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="order-detail-page-container">
+    
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb-bar" aria-label="Breadcrumb">
+      <a href="index.html">Trang chủ</a>
+      <span class="breadcrumb-separator">/</span>
+      <a href="index.html" onclick="event.preventDefault(); window.history.back();">Lịch sử đơn hàng</a>
+      <span class="breadcrumb-separator">/</span>
+      <span id="breadcrumb-order-id">Chi tiết đơn hàng</span>
+    </nav>
+
+    <!-- Placed Order Success Banner (shown when arriving from checkout) -->
+    <div class="placed-success-alert" id="placed-alert" style="display: none;">
+      <div class="placed-success-icon">🎉</div>
+      <div class="placed-success-text">
+        <h3>ĐẶT HÀNG THÀNH CÔNG!</h3>
+        <p>Cảm ơn quý khách đã mua sắm tại RAINBUSHOP. Đơn hàng của quý khách đã được lưu vào hệ thống và đang được xử lý.</p>
+      </div>
+    </div>
+
+    <!-- Empty Order Fallback Box -->
+    <div class="empty-order-box" id="empty-order-state" style="display: none;">
+      <div class="empty-icon">📦</div>
+      <div class="empty-title">Không Tìm Thấy Đơn Hàng</div>
+      <div class="empty-desc">Không tìm thấy mã đơn hàng phù hợp hoặc hệ thống chưa có đơn hàng nào được ghi nhận.</div>
+      <a href="index.html" class="nav-btn nav-btn-primary">Quay Về Trang Chủ Mua Sắm</a>
+    </div>
+
+    <!-- Order Content Wrapper -->
+    <div id="order-content-wrapper">
+
+      <!-- Hero Header Card -->
+      <section class="order-hero-card">
+        <div class="order-hero-left">
+          <h1>
+            <span>Chi Tiết Đơn Hàng</span>
+            <span class="order-hero-code" id="display-order-id">#ORD-00000000-000</span>
+          </h1>
+          <div class="order-hero-meta">
+            <span class="order-hero-meta-item">
+              <span>📅</span>
+              <span id="display-order-date">--/--/---- --:--</span>
+            </span>
+            <span class="order-hero-meta-item">
+              <span>💳</span>
+              <span id="display-order-payment">Thanh toán tiền mặt khi nhận (COD)</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="order-hero-right" style="display: flex; flex-direction: column; align-items: flex-end; gap: 10px;">
+          <div>
+            <span class="order-status-badge status-badge-unconfirmed" id="display-order-status-badge">Chưa xác nhận</span>
+          </div>
+          
+          <!-- Admin Status Update Controller (Enabled for Admin) -->
+          <div class="admin-status-control-box" id="admin-status-control" style="display: none;">
+            <label for="select-update-status">Cập nhật (Admin):</label>
+            <select id="select-update-status">
+              <!-- Dynamically built xuôi chiều -->
+            </select>
+            <button type="button" id="btn-save-order-status" onclick="handleUpdateStatus()">Cập nhật</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stepper / Tracker -->
+      <section class="order-tracker-card">
+        <div class="tracker-title">
+          <span>🚚</span>
+          <span>Tiến Trình Trạng Thái Đơn Hàng</span>
+        </div>
+        <div class="stepper-track">
+          <div class="stepper-track-progress" id="stepper-progress-bar" style="width: 10%;"></div>
+
+          <!-- Step 1: Placed -->
+          <div class="stepper-step completed" id="step-1">
+            <div class="step-circle">1</div>
+            <div class="step-label">Chờ xác nhận</div>
+          </div>
+
+          <!-- Step 2: Confirmed -->
+          <div class="stepper-step" id="step-2">
+            <div class="step-circle">2</div>
+            <div class="step-label">Đã xác nhận</div>
+          </div>
+
+          <!-- Step 3: Shipping -->
+          <div class="stepper-step" id="step-3">
+            <div class="step-circle">3</div>
+            <div class="step-label">Đang giao hàng</div>
+          </div>
+
+          <!-- Step 4: Finished / Cancelled -->
+          <div class="stepper-step" id="step-4">
+            <div class="step-circle">4</div>
+            <div class="step-label" id="step-4-label">Giao thành công</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3-Column Info Cards Grid -->
+      <section class="order-info-grid">
+        <!-- Card 1: Customer Info -->
+        <div class="info-card">
+          <div class="info-card-header">
+            <div class="info-card-icon">👤</div>
+            <h3 class="info-card-title">Thông Tin Khách Hàng</h3>
+          </div>
+          <div class="info-field-group">
+            <div class="info-field-row">
+              <span class="info-label">Người đặt hàng:</span>
+              <span class="info-value" id="info-customer-name">---</span>
+            </div>
+            <div class="info-field-row">
+              <span class="info-label">Số điện thoại:</span>
+              <span class="info-value" id="info-customer-phone">---</span>
+            </div>
+            <div class="info-field-row">
+              <span class="info-label">Mã khách hàng:</span>
+              <span class="info-value" id="info-customer-user">---</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Delivery Address -->
+        <div class="info-card">
+          <div class="info-card-header">
+            <div class="info-card-icon">📍</div>
+            <h3 class="info-card-title">Địa Chỉ Giao Hàng</h3>
+          </div>
+          <div class="info-field-group">
+            <div class="info-field-row">
+              <span class="info-label">Địa chỉ nhận:</span>
+              <span class="info-value" id="info-shipping-address">---</span>
+            </div>
+            <div class="info-field-row">
+              <span class="info-label">Tỉnh / Thành phố:</span>
+              <span class="info-value" id="info-shipping-city">---</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Payment & Shipping Method -->
+        <div class="info-card">
+          <div class="info-card-header">
+            <div class="info-card-icon">💳</div>
+            <h3 class="info-card-title">Thanh Toán & Vận Chuyển</h3>
+          </div>
+          <div class="info-field-group">
+            <div class="info-field-row">
+              <span class="info-label">Phương thức:</span>
+              <span class="info-value" id="info-payment-method">COD (Tiền mặt)</span>
+            </div>
+            <div class="info-field-row">
+              <span class="info-label">Đơn vị vận chuyển:</span>
+              <span class="info-value">Giao Hàng Nhanh 24H</span>
+            </div>
+            <div class="info-field-row">
+              <span class="info-label">Phí vận chuyển:</span>
+              <span class="info-value text-success font-bold" style="color: #10b981;">Miễn phí (0₫)</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Items Table -->
+      <section class="order-items-card">
+        <div class="order-items-card-header">
+          <h3 class="order-items-card-title">
+            <span>Danh Sách Sản Phẩm Đã Mua</span>
+            <span class="items-count-badge" id="items-count-badge">0 sản phẩm</span>
+          </h3>
+        </div>
+        <div class="table-container">
+          <table class="order-items-table">
+            <thead>
+              <tr>
+                <th style="width: 50px; text-align: center;">STT</th>
+                <th>Sản Phẩm</th>
+                <th style="width: 90px; text-align: center;">Size</th>
+                <th style="width: 140px; text-align: right;">Đơn Giá</th>
+                <th style="width: 90px; text-align: center;">Số Lượng</th>
+                <th style="width: 150px; text-align: right;">Thành Tiền</th>
+              </tr>
+            </thead>
+            <tbody id="order-items-tbody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Financial Calculation -->
+      <div style="display: flex; justify-content: flex-end;">
+        <section class="order-financial-card">
+          <div class="financial-row">
+            <span>Tạm tính tiền hàng:</span>
+            <strong id="fin-subtotal">0₫</strong>
+          </div>
+          <div class="financial-row">
+            <span>Phí vận chuyển toàn quốc:</span>
+            <span style="color: #10b981; font-weight: 600;">Miễn phí</span>
+          </div>
+          <div class="financial-row">
+            <span>Khuyến mãi / Giảm giá:</span>
+            <span>0₫</span>
+          </div>
+          <div class="financial-row total-row">
+            <span>TỔNG CỘNG THANH TOÁN:</span>
+            <span class="total-amount-highlight" id="fin-total">0₫</span>
+          </div>
+        </section>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="order-page-footer">
+    <div style="max-width: 1100px; margin: 0 auto; padding: 0 20px;">
+      <p style="margin: 0 0 4px; font-weight: 700; color: #1e293b;">RAINBUSHOP - HỆ THỐNG PHÂN PHỐI ĐỒ BÓNG RỔ CHÍNH HÃNG</p>
+      <p style="margin: 0;">Trường Đại học Sài Gòn (SGU) - Đồ án Lập trình Web & Ứng dụng nâng cao</p>
+    </div>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div id="order-toast" class="toast-box"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script>
+    (function () {
+      'use strict';
+
+      var currentOrder = null;
+      var ordersList = [];
+
+      function showToast(msg) {
+        var t = document.getElementById('order-toast');
+        if (!t) return;
+        t.textContent = msg;
+        t.classList.add('show');
+        setTimeout(function () {
+          t.classList.remove('show');
+        }, 3000);
+      }
+
+      function formatPrice(number, unit) {
+        if (typeof window.formatPrice === 'function') {
+          return window.formatPrice(number, unit);
+        }
+        unit = (unit !== undefined) ? unit : '₫';
+        if (number === undefined || number === null || number === '') return '0' + unit;
+        var clean = typeof number === 'number' ? number : parseFloat(String(number).replace(/[^0-9.-]/g, ''));
+        if (isNaN(clean)) return '0' + unit;
+        var formatted = Math.round(Math.abs(clean)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        return (clean < 0 ? '-' : '') + formatted + (unit ? (unit.startsWith(' ') || unit === '₫' || unit === 'đ' ? unit : ' ' + unit) : '');
+      }
+
+      function formatDisplayDate(dateVal) {
+        if (!dateVal) return '---';
+        var d = new Date(dateVal);
+        if (isNaN(d.getTime())) {
+          return dateVal;
+        }
+        var day = String(d.getDate()).padStart(2, '0');
+        var month = String(d.getMonth() + 1).padStart(2, '0');
+        var year = d.getFullYear();
+        var hours = String(d.getHours()).padStart(2, '0');
+        var mins = String(d.getMinutes()).padStart(2, '0');
+        return day + '/' + month + '/' + year + ' ' + hours + ':' + mins;
+      }
+
+      function initOrderDetailPage() {
+        ordersList = (typeof window.getOrders === 'function') ? window.getOrders() : [];
+
+        var params = new URLSearchParams(window.location.search);
+        var orderId = params.get('id');
+        var fromSource = params.get('from');
+        var isPlaced = params.get('placed');
+
+        // Check stored fallback
+        if (!orderId) {
+          try {
+            orderId = sessionStorage.getItem('current_view_order_id') || localStorage.getItem('current_view_order_id');
+          } catch (e) {}
+        }
+
+        // Show banner if newly placed
+        if (isPlaced === '1' || isPlaced === 'true') {
+          var alertBox = document.getElementById('placed-alert');
+          if (alertBox) alertBox.style.display = 'flex';
+        }
+
+        // Check if coming from admin or current logged in is admin
+        var currentAdmin = (typeof window.getCurrentAdmin === 'function') ? window.getCurrentAdmin() : null;
+        var isAdmin = (fromSource === 'admin') || (currentAdmin && currentAdmin.role === 'admin');
+
+        if (isAdmin) {
+          var adminBtn = document.getElementById('btn-nav-admin');
+          if (adminBtn) adminBtn.style.display = 'inline-flex';
+          var adminControl = document.getElementById('admin-status-control');
+          if (adminControl) adminControl.style.display = 'flex';
+        }
+
+        // Find the order
+        if (orderId) {
+          currentOrder = ordersList.find(function (o) {
+            return (o.id && String(o.id) === String(orderId)) || 
+                   (o.orderId && String(o.orderId).toUpperCase() === String(orderId).toUpperCase());
+          });
+        }
+
+        // Fallback: If not found or no ID provided, pick the most recent order
+        if (!currentOrder && ordersList.length > 0) {
+          currentOrder = ordersList[0];
+        }
+
+        if (!currentOrder) {
+          document.getElementById('empty-order-state').style.display = 'block';
+          document.getElementById('order-content-wrapper').style.display = 'none';
+          return;
+        }
+
+        renderOrderData(currentOrder, isAdmin);
+      }
+
+      function renderOrderData(order, isAdmin) {
+        var orderCode = order.orderId || order.id || 'ORD-UNKNOWN';
+        document.getElementById('breadcrumb-order-id').textContent = 'Đơn hàng #' + orderCode;
+        document.getElementById('display-order-id').textContent = '#' + orderCode;
+        document.getElementById('display-order-date').textContent = formatDisplayDate(order.orderDate);
+
+        var paymentText = (order.paymentMethod === 'Banking') 
+          ? 'Chuyển khoản trực tuyến (Banking / Momo)' 
+          : 'Thanh toán tiền mặt khi nhận hàng (COD)';
+        document.getElementById('display-order-payment').textContent = paymentText;
+        document.getElementById('info-payment-method').textContent = paymentText;
+
+        // Customer info
+        document.getElementById('info-customer-name').textContent = order.customerName || 'Khách hàng';
+        document.getElementById('info-customer-phone').textContent = order.phone || '---';
+        document.getElementById('info-customer-user').textContent = order.userId || order.username || 'Khách vãng lai';
+
+        // Shipping address
+        var fullAddress = (order.address || 'Tại cửa hàng');
+        document.getElementById('info-shipping-address').textContent = fullAddress;
+        document.getElementById('info-shipping-city').textContent = order.city || 'TP. Hồ Chí Minh';
+
+        // Status badge
+        var status = order.status || 'Chưa xác nhận';
+        var badgeEl = document.getElementById('display-order-status-badge');
+        badgeEl.textContent = status;
+        badgeEl.className = 'order-status-badge ' + getStatusBadgeClass(status);
+
+        // Update Stepper
+        updateStepper(status);
+
+        // Update Admin forward-only select
+        if (isAdmin) {
+          buildAdminStatusSelect(status);
+        }
+
+        // Render Items Table
+        var tbody = document.getElementById('order-items-tbody');
+        var items = order.items || [];
+        document.getElementById('items-count-badge').textContent = items.length + ' sản phẩm';
+
+        var rowsHtml = '';
+        var totalAmount = 0;
+
+        items.forEach(function (item, index) {
+          var itemPrice = Number(item.price) || 0;
+          var itemQty = Number(item.quantity) || 1;
+          var lineTotal = itemPrice * itemQty;
+          totalAmount += lineTotal;
+
+          var itemImg = item.image || 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=400&q=80';
+          var itemName = item.name || item.productName || 'Sản phẩm thể thao';
+          var itemSku = item.sku ? ('SKU: ' + item.sku) : '';
+          var itemSize = item.size || 'FreeSize';
+
+          rowsHtml += '<tr>' +
+            '<td style="text-align: center; font-weight: 700; color: #94a3b8;">' + (index + 1) + '</td>' +
+            '<td>' +
+              '<div class="item-product-flex">' +
+                '<img src="' + itemImg + '" alt="' + itemName + '" class="item-thumbnail" onerror="this.src=\'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=400&q=80\'">' +
+                '<div class="item-info-text">' +
+                  '<div class="item-name">' + itemName + '</div>' +
+                  (itemSku ? '<div class="item-meta">' + itemSku + '</div>' : '') +
+                '</div>' +
+              '</div>' +
+            '</td>' +
+            '<td style="text-align: center;"><span class="size-badge">' + itemSize + '</span></td>' +
+            '<td style="text-align: right; font-weight: 600;">' + formatPrice(itemPrice) + '</td>' +
+            '<td style="text-align: center; font-weight: 700; font-size: 15px;">' + itemQty + '</td>' +
+            '<td style="text-align: right; font-weight: 700; color: #e11d48;">' + formatPrice(lineTotal) + '</td>' +
+          '</tr>';
+        });
+
+        if (items.length === 0) {
+          rowsHtml = '<tr><td colspan="6" style="text-align: center; padding: 30px; color: #94a3b8;">Không có dữ liệu sản phẩm trong đơn hàng này.</td></tr>';
+        }
+
+        tbody.innerHTML = rowsHtml;
+
+        var finalTotal = order.totalAmount || totalAmount;
+        document.getElementById('fin-subtotal').textContent = formatPrice(finalTotal);
+        document.getElementById('fin-total').textContent = formatPrice(finalTotal);
+      }
+
+      function getStatusBadgeClass(status) {
+        if (status === 'Chưa xác nhận') return 'status-badge-unconfirmed';
+        if (status === 'Đã xác nhận') return 'status-badge-confirmed';
+        if (status === 'Đang giao hàng') return 'status-badge-shipping';
+        if (status === 'Đã giao thành công' || status === 'Đã giao' || status === 'Hoàn thành') return 'status-badge-delivered';
+        if (status === 'Huỷ đơn' || status === 'Đã hủy') return 'status-badge-cancelled';
+        return 'status-badge-unconfirmed';
+      }
+
+      function updateStepper(status) {
+        var s1 = document.getElementById('step-1');
+        var s2 = document.getElementById('step-2');
+        var s3 = document.getElementById('step-3');
+        var s4 = document.getElementById('step-4');
+        var s4Label = document.getElementById('step-4-label');
+        var pBar = document.getElementById('stepper-progress-bar');
+
+        [s1, s2, s3, s4].forEach(function (el) {
+          el.className = 'stepper-step';
+        });
+
+        if (status === 'Chưa xác nhận') {
+          s1.className = 'stepper-step active';
+          pBar.style.width = '10%';
+        } else if (status === 'Đã xác nhận') {
+          s1.className = 'stepper-step completed';
+          s2.className = 'stepper-step active';
+          pBar.style.width = '38%';
+        } else if (status === 'Đang giao hàng') {
+          s1.className = 'stepper-step completed';
+          s2.className = 'stepper-step completed';
+          s3.className = 'stepper-step active';
+          pBar.style.width = '70%';
+        } else if (status === 'Đã giao thành công' || status === 'Đã giao' || status === 'Hoàn thành') {
+          s1.className = 'stepper-step completed';
+          s2.className = 'stepper-step completed';
+          s3.className = 'stepper-step completed';
+          s4.className = 'stepper-step completed';
+          s4Label.textContent = 'Giao thành công';
+          pBar.style.width = '100%';
+        } else if (status === 'Huỷ đơn' || status === 'Đã hủy') {
+          s1.className = 'stepper-step completed';
+          s4.className = 'stepper-step cancelled';
+          s4Label.textContent = 'Đã huỷ đơn';
+          pBar.style.width = '100%';
+          pBar.style.background = '#ef4444';
+        }
+      }
+
+      // Rule: Trạng thái chỉ có thể cập nhật xuôi, không cho phép cập nhật ngược
+      function buildAdminStatusSelect(currentStatus) {
+        var sel = document.getElementById('select-update-status');
+        var btn = document.getElementById('btn-save-order-status');
+        if (!sel || !btn) return;
+
+        sel.innerHTML = '';
+        btn.disabled = false;
+
+        if (currentStatus === 'Chưa xác nhận') {
+          sel.innerHTML = 
+            '<option value="Chưa xác nhận" selected disabled>Chưa xác nhận (Hiện tại)</option>' +
+            '<option value="Đã xác nhận">➔ Đã xác nhận</option>' +
+            '<option value="Huỷ đơn">➔ Huỷ đơn</option>';
+        } else if (currentStatus === 'Đã xác nhận') {
+          sel.innerHTML = 
+            '<option value="Đã xác nhận" selected disabled>Đã xác nhận (Hiện tại)</option>' +
+            '<option value="Đã giao thành công">➔ Đã giao thành công</option>' +
+            '<option value="Huỷ đơn">➔ Huỷ đơn</option>';
+        } else if (currentStatus === 'Đã giao thành công' || currentStatus === 'Đã giao') {
+          sel.innerHTML = '<option selected disabled>✓ Đã giao thành công (Đã khóa)</option>';
+          btn.disabled = true;
+        } else if (currentStatus === 'Huỷ đơn' || currentStatus === 'Đã hủy') {
+          sel.innerHTML = '<option selected disabled>✕ Huỷ đơn (Đã khóa)</option>';
+          btn.disabled = true;
+        } else {
+          sel.innerHTML = '<option selected>' + currentStatus + '</option>';
+        }
+      }
+
+      window.handleUpdateStatus = function () {
+        if (!currentOrder) return;
+        var sel = document.getElementById('select-update-status');
+        if (!sel) return;
+
+        var nextStatus = sel.value;
+        if (!nextStatus || nextStatus === currentOrder.status || nextStatus.indexOf('Hiện tại') !== -1 || nextStatus.indexOf('Đã khóa') !== -1) {
+          alert('Vui lòng chọn trạng thái tiếp theo cần cập nhật!');
+          return;
+        }
+
+        var confirmed = confirm('Xác nhận cập nhật trạng thái đơn hàng #' + (currentOrder.orderId || currentOrder.id) + ' sang: "' + nextStatus + '"?');
+        if (!confirmed) return;
+
+        currentOrder.status = nextStatus;
+
+        // Save back to orders
+        var allOrders = (typeof window.getOrders === 'function') ? window.getOrders() : ordersList;
+        var idx = allOrders.findIndex(function (o) {
+          return (o.id && String(o.id) === String(currentOrder.id)) ||
+                 (o.orderId && String(o.orderId) === String(currentOrder.orderId));
+        });
+
+        if (idx !== -1) {
+          allOrders[idx].status = nextStatus;
+          if (typeof window.saveOrders === 'function') {
+            window.saveOrders(allOrders);
+          }
+        }
+
+        showToast('Đã cập nhật trạng thái đơn hàng thành: ' + nextStatus);
+        renderOrderData(currentOrder, true);
+      };
+
+      // Bootstrap on DOM ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initOrderDetailPage);
+      } else {
+        initOrderDetailPage();
+      }
+
+    })();
+  </script>
+</body>
+</html>

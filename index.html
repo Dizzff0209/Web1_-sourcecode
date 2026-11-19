@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RAINBUSHOP | Cửa hàng bóng rổ Sài Gòn - Chuyên giày & phụ kiện bóng rổ chính hãng</title>
+  
+  <!-- Google Fonts: Be Vietnam Pro -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- ================= TOPBAR ================= -->
+  <aside class="topbar" id="topbar" aria-label="Thông báo đầu trang">
+    <div class="container topbar-content">
+      <div class="topbar-marquee">
+        <span class="topbar-badge">OFFICIAL STORE</span>
+        <span class="topbar-text">RAINBUSHOP - CỬA HÀNG BÓNG RỔ UY TÍN TẠI SÀI GÒN | CAM KẾT CHÍNH HÃNG 100%</span>
+      </div>
+      <div class="topbar-contact">
+        <span class="contact-item">
+          <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Hotline: <strong>0909.123.456</strong>
+        </span>
+        <span class="topbar-divider">|</span>
+        <span class="contact-item">1283 Phạm Thế Hiển, P.5, Q.8, TP.HCM</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ================= HEADER ================= -->
+  <header class="site-header" id="site-header">
+    <!-- Top Row: Logo, Search & Filter, Actions -->
+    <div class="header-main-row">
+      <div class="container header-inner">
+        <!-- Mobile Menu Toggle -->
+        <button class="mobile-toggle-btn" id="btn-mobile-menu" aria-label="Mở menu di động">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+
+        <!-- Logo -->
+        <a href="index.html" class="logo" id="site-logo">
+          <span class="logo-ball">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M4.93 4.93l4.24 4.24"/>
+              <path d="M14.83 14.83l4.24 4.24"/>
+              <path d="M14.83 9.17l4.24-4.24"/>
+              <path d="M4.93 19.07l4.24-4.24"/>
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+          </span>
+          <span class="logo-text">RAINBU<span class="logo-accent">SHOP</span></span>
+        </a>
+
+        <!-- Search Bar & Filter (Center) -->
+        <div class="header-search-center">
+          <div class="search-wrapper">
+            <form class="search-form" id="header-search-form" onsubmit="return false;">
+              <input type="text" id="header-search-input" class="search-input" placeholder="Tìm kiếm giày, bóng, quần áo..." autocomplete="off">
+              <button type="submit" class="search-submit-btn" id="btn-header-search" title="Tìm kiếm">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              </button>
+              <button type="button" class="search-clear-btn" id="btn-header-search-clear" title="Xóa tìm kiếm" style="display: none;">&times;</button>
+            </form>
+          </div>
+
+          <!-- Advanced Search Toggle Button -->
+          <button class="action-btn adv-search-toggle" id="btn-toggle-adv-search" title="Tìm kiếm nâng cao">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+            <span class="action-label">Tìm kiếm nâng cao</span>
+          </button>
+        </div>
+
+        <!-- Right Header Actions (Account & Cart) -->
+        <div class="header-actions">
+          <!-- Account Area (Dynamic via JS) -->
+          <div class="account-area" id="header-user-area">
+            <!-- Rendered by app.js: Guest or Logged User Dropdown -->
+          </div>
+
+          <!-- Cart Button -->
+          <button class="action-btn cart-btn" id="btn-open-cart" title="Xem giỏ hàng">
+            <span class="cart-icon-wrapper">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+              <span class="cart-badge" id="cart-count-badge">0</span>
+            </span>
+            <span class="cart-label action-label">Giỏ hàng</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Row: Navigation Menu Bar (Nằm ngang đẹp mắt, không bao giờ bị đè chữ) -->
+    <div class="header-nav-row">
+      <div class="container">
+        <nav class="nav-menu" id="main-nav">
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="javascript:void(0)" class="nav-link active" data-category="all">TRANG CHỦ</a>
+            </li>
+            <li class="nav-item">
+              <a href="javascript:void(0)" class="nav-link" data-category="cat1">GIÀY BÓNG RỔ</a>
+            </li>
+            <li class="nav-item">
+              <a href="javascript:void(0)" class="nav-link" data-category="cat2">GIÀY SNEAKER</a>
+            </li>
+            <li class="nav-item">
+              <a href="javascript:void(0)" class="nav-link" data-category="cat3">QUẦN ÁO BÓNG RỔ</a>
+            </li>
+            <li class="nav-item">
+              <a href="javascript:void(0)" class="nav-link" data-category="cat4">BANH BÓNG RỔ</a>
+            </li>
+            <li class="nav-item">
+              <a href="javascript:void(0)" class="nav-link" data-category="cat5">PHỤ KIỆN &amp; VỚ</a>
+            </li>
+            <li class="nav-item">
+              <a href="order-detail.html" class="nav-link nav-link-order" title="Trang chi tiết đơn hàng riêng">ĐƠN HÀNG</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= HERO SLIDER ================= -->
+  <section class="hero-slider-section" aria-label="Banner nổi bật">
+    <div class="hero-slider" id="hero-slider">
+      <!-- Slide 1 -->
+      <div class="hero-slide active" data-slide="0" style="background-image: linear-gradient(rgba(17,17,17,0.7), rgba(17,17,17,0.4)), url('https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1600&q=80');">
+        <div class="container hero-content">
+          <span class="hero-tag">CHIẾN BINH MẶT SÀN</span>
+          <h1 class="hero-title">KOBE 6 PROTRO<br><span class="text-primary">'REVERSE GRINCH'</span></h1>
+          <p class="hero-desc">Huyền thoại Black Mamba trở lại với phối màu rực lửa. Bộ đệm Zoom Turbo linh hoạt, thiết kế da rắn kinh điển cho từng bước bứt phá.</p>
+          <div class="hero-buttons">
+            <button class="btn btn-primary btn-lg" onclick="app.filterByCategory('cat1')">KHÁM PHÁ NGAY</button>
+            <button class="btn btn-outline-light btn-lg" onclick="app.quickViewProduct('prod_01')">XEM CHI TIẾT</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="hero-slide" data-slide="1" style="background-image: linear-gradient(rgba(17,17,17,0.7), rgba(17,17,17,0.4)), url('https://images.unsplash.com/photo-1579338559194-a162d19bf842?auto=format&fit=crop&w=1600&q=80');">
+        <div class="container hero-content">
+          <span class="hero-tag">BỘ SƯU TẬP 2026</span>
+          <h2 class="hero-title">GIÀY BÓNG RỔ CHÍNH HÃNG<br><span class="text-primary">NIKE & JORDAN</span></h2>
+          <p class="hero-desc">Tuyển tập những siêu phẩm hiệu năng cao nhất: LeBron 21, KD 16, GT Cut 3, Luka 2. Cam kết 100% Authentic, bảo hành keo trọn đời.</p>
+          <div class="hero-buttons">
+            <button class="btn btn-primary btn-lg" onclick="app.filterByCategory('cat1')">MUA SẮM NGAY</button>
+            <button class="btn btn-outline-light btn-lg" onclick="app.openSizeGuide()">HƯỚNG DẪN SIZE</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="hero-slide" data-slide="2" style="background-image: linear-gradient(rgba(17,17,17,0.7), rgba(17,17,17,0.4)), url('https://images.unsplash.com/photo-1519861531473-9200262188bf?auto=format&fit=crop&w=1600&q=80');">
+        <div class="container hero-content">
+          <span class="hero-tag">TRANG THIẾT BỊ THI ĐẤU</span>
+          <h2 class="hero-title">BANH MOLTEN & PHỤ KIỆN<br><span class="text-primary">ĐẠT CHUẨN FIBA</span></h2>
+          <p class="hero-desc">Đầy đủ bóng rổ Molten BG4500, Spalding TF1000, vớ Nike Elite chuyên dụng và bảo hộ McDavid chống chấn thương.</p>
+          <div class="hero-buttons">
+            <button class="btn btn-primary btn-lg" onclick="app.filterByCategory('cat4')">XEM BANH BÓNG RỔ</button>
+            <button class="btn btn-outline-light btn-lg" onclick="app.filterByCategory('cat5')">PHỤ KIỆN & VỚ</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <button class="slider-control prev" id="slider-prev" aria-label="Slide trước">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="slider-control next" id="slider-next" aria-label="Slide sau">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+
+      <!-- Indicators -->
+      <div class="slider-indicators" id="slider-indicators">
+        <button class="slider-dot active" data-index="0" aria-label="Chuyển đến Slide 1"></button>
+        <button class="slider-dot" data-index="1" aria-label="Chuyển đến Slide 2"></button>
+        <button class="slider-dot" data-index="2" aria-label="Chuyển đến Slide 3"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ADVANCED SEARCH PANEL ================= -->
+  <section class="adv-search-section" id="advanced-search-panel" style="display: none;">
+    <div class="container">
+      <div class="adv-search-card">
+        <div class="adv-search-header">
+          <div class="adv-search-title-wrap">
+            <svg class="icon text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+            <div>
+              <h3 class="adv-search-title">TÌM KIẾM NÂNG CAO</h3>
+            </div>
+          </div>
+          <button type="button" class="btn-close-panel" id="btn-close-adv-search" title="Đóng tìm kiếm nâng cao">&times;</button>
+        </div>
+        <form id="adv-search-form" class="adv-search-grid" onsubmit="return false;">
+          <div class="form-group">
+            <label for="adv-keyword">Từ khóa tìm kiếm</label>
+            <input type="text" id="adv-keyword" class="form-control" placeholder="Tên sản phẩm, ví dụ: Kobe, Jordan, Molten...">
+          </div>
+          <div class="form-group">
+            <label for="adv-category">Danh mục sản phẩm</label>
+            <select id="adv-category" class="form-control">
+              <option value="all">Tất cả danh mục</option>
+              <option value="cat1">Giày Bóng Rổ</option>
+              <option value="cat2">Giày Sneaker</option>
+              <option value="cat3">Quần Áo Bóng Rổ</option>
+              <option value="cat4">Banh Bóng Rổ</option>
+              <option value="cat5">Phụ Kiện &amp; Vớ</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="adv-min-price">Khoảng giá tối thiểu (VNĐ)</label>
+            <input type="text" id="adv-min-price" class="form-control price-formatted-input" placeholder="Từ (ví dụ: 500.000₫)" inputmode="numeric" autocomplete="off">
+            <div class="price-preview-hint" id="hint-adv-min-price" style="display: none;"></div>
+          </div>
+          <div class="form-group">
+            <label for="adv-max-price">Khoảng giá tối đa (VNĐ)</label>
+            <input type="text" id="adv-max-price" class="form-control price-formatted-input" placeholder="Đến (ví dụ: 5.000.000₫)" inputmode="numeric" autocomplete="off">
+            <div class="price-preview-hint" id="hint-adv-max-price" style="display: none;"></div>
+          </div>
+          <div class="adv-search-actions">
+            <button type="submit" class="btn btn-primary btn-block" id="btn-adv-search">
+              <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              TÌM KIẾM
+            </button>
+            <button type="button" class="btn btn-outline-dark" id="btn-adv-reset">
+              ĐẶT LẠI
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FEATURES BAR ================= -->
+  <section class="features-bar">
+    <div class="container features-grid">
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="feature-text">
+          <strong>100% CHÍNH HÃNG</strong>
+          <span>Cam kết đền gấp 10 nếu phát hiện Fake</span>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="feature-text">
+          <strong>ĐỔI TRẢ TRONG 7 NGÀY</strong>
+          <span>Đổi size linh hoạt nếu chưa qua sử dụng</span>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <div class="feature-text">
+          <strong>GIAO HÀNG TOÀN QUỐC</strong>
+          <span>Kiểm tra hàng trước khi thanh toán (COD)</span>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="feature-text">
+          <strong>TƯ VẤN CHUYÊN NGHIỆP</strong>
+          <span>Hỗ trợ chọn giày hợp form chân & mặt sân</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PRODUCT SECTION ================= -->
+  <main class="main-content" id="product-section">
+    <div class="container">
+      <!-- Section Header -->
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <h2 class="section-title" id="section-title">TẤT CẢ SẢN PHẨM</h2>
+          <span class="product-count" id="product-count-display">(Hiển thị 0 sản phẩm)</span>
+        </div>
+        
+        <!-- Filter Status and Sort Dropdown -->
+        <div class="section-controls">
+          <div class="active-filter-badge" id="active-filter-badge" style="display: none;">
+            <span id="active-filter-text">Đang lọc...</span>
+            <button type="button" class="btn-clear-filter" id="btn-clear-current-filter" title="Xóa bộ lọc">&times;</button>
+          </div>
+          <div class="sort-wrapper">
+            <label for="sort-select" class="sort-label">Sắp xếp:</label>
+            <select id="sort-select" class="sort-select">
+              <option value="default">Mặc định</option>
+              <option value="price-asc">Giá: Thấp đến Cao</option>
+              <option value="price-desc">Giá: Cao đến Thấp</option>
+              <option value="name-asc">Tên: A - Z</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="product-grid" id="product-grid">
+        <!-- Rendered by app.js -->
+      </div>
+
+      <!-- Empty State -->
+      <div class="empty-state" id="empty-state" style="display: none;">
+        <div class="empty-state-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+        </div>
+        <h3 class="empty-title">Không tìm thấy sản phẩm phù hợp</h3>
+        <p class="empty-desc">Vui lòng thử tìm kiếm với từ khóa khác hoặc điều chỉnh lại mức giá trong tìm kiếm nâng cao.</p>
+        <button class="btn btn-primary" onclick="app.resetAllFilters()">XEM TẤT CẢ SẢN PHẨM</button>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination-wrapper" id="pagination-wrapper">
+        <div class="pagination" id="pagination">
+          <!-- Rendered by app.js -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ================= SIZE GUIDE BANNER ================= -->
+  <section class="banner-cta">
+    <div class="container banner-cta-inner">
+      <div class="cta-text">
+        <h3>BẠN ĐANG PHÂN VÂN CHƯA BIẾT CHỌN SIZE NÀO?</h3>
+        <p>Tham khảo bảng quy đổi size giày bóng rổ Nike, Jordan, Adidas hoặc liên hệ ngay để chuyên viên tư vấn chuẩn form chân bè hay chân thon.</p>
+      </div>
+      <button class="btn btn-light btn-lg" onclick="app.openSizeGuide()">XEM BẢNG SIZE CHUẨN</button>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <!-- Col 1: Store info -->
+      <div class="footer-col">
+        <div class="footer-logo">
+          <span class="logo-ball">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M4.93 4.93l4.24 4.24"/><path d="M14.83 14.83l4.24 4.24"/><path d="M14.83 9.17l4.24-4.24"/><path d="M4.93 19.07l4.24-4.24"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </span>
+          <span class="logo-text">RAINBU<span class="text-primary">SHOP</span></span>
+        </div>
+        <p class="footer-about">RAINBUSHOP là hệ thống bán lẻ giày và phụ kiện bóng rổ hàng đầu Sài Gòn. Nơi hội tụ niềm đam mê bóng cam với các dòng giày hiệu năng cao cấp nhất.</p>
+        <ul class="footer-info-list">
+          <li>
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span><strong>Địa chỉ:</strong> 1283 Phạm Thế Hiển, P.5, Q.8, TP.HCM</span>
+          </li>
+          <li>
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span><strong>Hotline:</strong> 0909.123.456</span>
+          </li>
+          <li>
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span><strong>Email:</strong> contact@rainbushop.vn</span>
+          </li>
+          <li>
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span><strong>Mở cửa:</strong> 09:00 - 21:30 (Cả tuần)</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Col 2: Categories -->
+      <div class="footer-col">
+        <h4 class="footer-col-title">DANH MỤC SẢN PHẨM</h4>
+        <ul class="footer-links">
+          <li><a href="javascript:void(0)" onclick="app.filterByCategory('cat1')">Giày Bóng Rổ Chính Hãng</a></li>
+          <li><a href="javascript:void(0)" onclick="app.filterByCategory('cat2')">Giày Sneaker Streetwear</a></li>
+          <li><a href="javascript:void(0)" onclick="app.filterByCategory('cat3')">Quần Áo Bóng Rổ NBA</a></li>
+          <li><a href="javascript:void(0)" onclick="app.filterByCategory('cat4')">Banh Bóng Rổ Molten &amp; Spalding</a></li>
+          <li><a href="javascript:void(0)" onclick="app.filterByCategory('cat5')">Phụ Kiện, Vớ &amp; Bó Cơ</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Customer Policies -->
+      <div class="footer-col">
+        <h4 class="footer-col-title">CHÍNH SÁCH &amp; HỖ TRỢ</h4>
+        <ul class="footer-links">
+          <li><a href="javascript:void(0)" onclick="app.openSizeGuide()">Hướng dẫn chọn size giày &amp; áo</a></li>
+          <li><a href="javascript:void(0)" onclick="app.showPolicyModal('exchange')">Chính sách đổi trả &amp; hoàn tiền</a></li>
+          <li><a href="javascript:void(0)" onclick="app.showPolicyModal('warranty')">Chính sách bảo hành keo trọn đời</a></li>
+          <li><a href="javascript:void(0)" onclick="app.showPolicyModal('shipping')">Phương thức giao hàng &amp; thanh toán</a></li>
+          <li><a href="javascript:void(0)" onclick="app.showPolicyModal('privacy')">Điều khoản bảo mật thông tin</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Fanpage & Payment methods -->
+      <div class="footer-col">
+        <h4 class="footer-col-title">PHƯƠNG THỨC THANH TOÁN</h4>
+        <p class="footer-subtext">Hỗ trợ nhận ship COD tận nhà kiểm tra hàng hoặc Chuyển khoản ngân hàng 24/7.</p>
+        <div class="payment-badges">
+          <span class="pay-badge">TIỀN MẶT (COD)</span>
+          <span class="pay-badge">VIETCOMBANK</span>
+          <span class="pay-badge">CHUYỂN KHOẢN 24/7</span>
+        </div>
+        <div class="authentic-cert">
+          <svg class="icon-cert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          <div>
+            <strong>100% AUTHENTIC GUARANTEE</strong>
+            <span>Hàng chính hãng nhập khẩu</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Copyright Bar -->
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>&copy; 2026 RAINBUSHOP. Tất cả các quyền được bảo lưu. Thiết kế phong cách bóng rổ Sài Gòn.</p>
+        <p class="footer-credits">Địa chỉ trải nghiệm: 1283 Phạm Thế Hiển, TP. Hồ Chí Minh | <a href="admin.html" style="color: #e53935; text-decoration: underline; font-weight: 600; margin-left: 6px;">Vào Trang Quản Trị (admin.html)</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= ALL MODALS & DRAWERS ================= -->
+
+  <!-- 1. PRODUCT DETAIL MODAL -->
+  <div class="modal-overlay" id="modal-product-detail" style="display: none;">
+    <div class="modal-container modal-lg">
+      <button class="modal-close-btn" onclick="app.closeModal('modal-product-detail')" title="Đóng">&times;</button>
+      <div class="product-detail-layout" id="product-detail-content">
+        <!-- Rendered by app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- USER PROFILE MODAL (THÔNG TIN CÁ NHÂN) -->
+  <div class="modal-overlay" id="modal-user-profile" style="display: none;">
+    <div class="modal-container modal-md">
+      <button class="modal-close-btn" onclick="app.closeModal('modal-user-profile')" title="Đóng">&times;</button>
+      <div class="modal-header">
+        <div class="modal-header-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <h3 class="modal-title">THÔNG TIN CÁ NHÂN</h3>
+        <p class="modal-subtitle">Xem và cập nhật thông tin tài khoản người mua hàng</p>
+      </div>
+      <form id="profile-form" class="modal-form" onsubmit="event.preventDefault(); app.saveUserProfile();">
+        <div class="form-row-2">
+          <div class="form-group">
+            <label for="profile-username">Tên đăng nhập (Username)</label>
+            <input type="text" id="profile-username" class="form-control" readonly style="background: #f1f5f9; color: #64748b;">
+          </div>
+          <div class="form-group">
+            <label for="profile-fullname">Họ và tên</label>
+            <input type="text" id="profile-fullname" class="form-control" placeholder="Họ và tên">
+          </div>
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label for="profile-phone">Số điện thoại</label>
+            <input type="tel" id="profile-phone" class="form-control" placeholder="Số điện thoại">
+          </div>
+        <div class="form-group">
+          <label for="profile-address">Địa chỉ nhận hàng (Số nhà, tên đường, Phường...)</label>
+          <input type="text" id="profile-address" class="form-control" placeholder="Ví dụ: 1283 Phạm Thế Hiển, Phường 5">
+        </div>
+        <div class="form-group">
+          <label for="profile-city">Tỉnh / Thành phố</label>
+          <input type="text" id="profile-city" class="form-control" placeholder="Ví dụ: TP. Hồ Chí Minh">
+        </div>
+        </div>
+
+        <div style="display: flex; gap: 12px; margin-top: 20px;">
+          <button type="submit" class="btn btn-primary btn-block btn-lg">💾 LƯU THAY ĐỔI</button>
+          <button type="button" class="btn btn-outline-dark btn-block btn-lg" onclick="app.closeModal('modal-user-profile')">ĐÓNG</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. LOGIN MODAL -->
+  <div class="modal-overlay" id="modal-login" style="display: none;">
+    <div class="modal-container modal-sm">
+      <button class="modal-close-btn" onclick="app.closeModal('modal-login')" title="Đóng">&times;</button>
+      <div class="modal-header">
+        <div class="modal-header-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <h3 class="modal-title">ĐĂNG NHẬP</h3>
+        <p class="modal-subtitle">Đăng nhập để đặt hàng và xem lại lịch sử giao dịch</p>
+      </div>
+      <form id="login-form" class="modal-form" onsubmit="return false;">
+        <div class="form-alert error" id="login-error-msg" style="display: none;"></div>
+        <div class="form-group">
+          <label for="login-username">Tên đăng nhập (Bỏ mọi ràng buộc)</label>
+          <input type="text" id="login-username" class="form-control" placeholder="Nhập tên đăng nhập (tùy ý)" autocomplete="username">
+        </div>
+        <div class="form-group">
+          <label for="login-password">Mật khẩu (Bỏ mọi ràng buộc)</label>
+          <input type="password" id="login-password" class="form-control" placeholder="Nhập mật khẩu (tùy ý)" autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block btn-lg" id="btn-submit-login">ĐĂNG NHẬP</button>
+      </form>
+      <div class="modal-footer-hint">
+        <span>Chưa có tài khoản?</span>
+        <button type="button" class="btn-link" onclick="app.switchToRegister()">Đăng ký tài khoản mới</button>
+      </div>
+      <div class="demo-account-hint">
+        <p><strong>Tài khoản dùng thử (Seed Data):</strong></p>
+        <p>Khách hàng: <code>nguyenvanan</code> / Mật khẩu: <code>123456</code> (hoặc bất kỳ tài khoản nào)</p>
+        <p>Quản trị viên: <code>admin</code> / Mật khẩu: <code>123456</code> (<a href="admin.html" style="color: #e53935; font-weight: 600; text-decoration: underline;">Đến admin.html</a>)</p>
+        <p>Tài khoản bị khóa (Test chức năng Khóa của Admin): <code>huynhphu</code> / <code>123456</code></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. REGISTER MODAL (BỎ HẾT RÀNG BUỘC) -->
+  <div class="modal-overlay" id="modal-register" style="display: none;">
+    <div class="modal-container modal-md">
+      <button class="modal-close-btn" onclick="app.closeModal('modal-register')" title="Đóng">&times;</button>
+      <div class="modal-header">
+        <div class="modal-header-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+        </div>
+        <h3 class="modal-title">ĐĂNG KÝ TÀI KHOẢN</h3>
+        <p class="modal-subtitle">Tạo tài khoản nhanh chóng - Không ràng buộc thông tin</p>
+      </div>
+      <form id="register-form" class="modal-form" onsubmit="return false;">
+        <div class="form-alert error" id="register-error-msg" style="display: none;"></div>
+        
+        <div class="form-row-2">
+          <div class="form-group">
+            <label for="reg-fullname">Họ và tên</label>
+            <input type="text" id="reg-fullname" class="form-control" placeholder="Ví dụ: Nguyễn Văn Hùng (tùy ý)">
+          </div>
+          <div class="form-group">
+            <label for="reg-username">Tên đăng nhập</label>
+            <input type="text" id="reg-username" class="form-control" placeholder="Tên đăng nhập tùy ý" autocomplete="username">
+          </div>
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label for="reg-password">Mật khẩu</label>
+            <input type="password" id="reg-password" class="form-control" placeholder="Mật khẩu tùy ý" autocomplete="new-password">
+          </div>
+          <div class="form-group">
+            <label for="reg-confirm-password">Nhập lại mật khẩu</label>
+            <input type="password" id="reg-confirm-password" class="form-control" placeholder="Nhập lại mật khẩu (tùy ý)" autocomplete="new-password">
+          </div>
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label for="reg-phone">Số điện thoại</label>
+            <input type="tel" id="reg-phone" class="form-control" placeholder="Ví dụ: 0987654321 (tùy ý)">
+          </div>
+          <div class="form-group">
+            <label for="reg-city">Tỉnh / Thành phố</label>
+            <input type="text" id="reg-city" class="form-control" placeholder="Ví dụ: TP. Hồ Chí Minh (tùy ý)">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="reg-address">Địa chỉ nhận hàng (Số nhà, tên đường, Phường...)</label>
+          <input type="text" id="reg-address" class="form-control" placeholder="Ví dụ: 1283 Phạm Thế Hiển, Phường 5">
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block btn-lg" id="btn-submit-register">ĐĂNG KÝ TÀI KHOẢN</button>
+      </form>
+      <div class="modal-footer-hint">
+        <span>Đã có tài khoản?</span>
+        <button type="button" class="btn-link" onclick="app.switchToLogin()">Đăng nhập ngay</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. CART SIDEBAR (DRAWER) -->
+  <div class="cart-sidebar-overlay" id="cart-sidebar-overlay" onclick="app.closeCart()" style="display: none;"></div>
+  <aside class="cart-sidebar" id="cart-sidebar" aria-label="Giỏ hàng của bạn">
+    <div class="cart-sidebar-header">
+      <div class="cart-sidebar-title">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <h3>GIỎ HÀNG (<span id="cart-drawer-count">0</span>)</h3>
+      </div>
+      <button class="cart-sidebar-close" onclick="app.closeCart()" title="Đóng">&times;</button>
+    </div>
+
+    <!-- Cart items body -->
+    <div class="cart-sidebar-body" id="cart-sidebar-body">
+      <!-- Rendered by app.js -->
+    </div>
+
+    <!-- Cart footer -->
+    <div class="cart-sidebar-footer" id="cart-sidebar-footer">
+      <div class="cart-subtotal-row">
+        <span>Tổng tiền thanh toán:</span>
+        <strong class="cart-subtotal-price" id="cart-subtotal-display">0₫</strong>
+      </div>
+      <p class="cart-shipping-note">Miễn phí giao hàng cho tất cả đơn hàng bóng rổ toàn quốc!</p>
+      <div class="cart-footer-buttons">
+        <button class="btn btn-outline-dark btn-block" onclick="app.closeCart()">TIẾP TỤC MUA SẮM</button>
+        <button class="btn btn-primary btn-block btn-lg" id="btn-proceed-checkout" onclick="app.openCheckout()">TIẾN HÀNH THANH TOÁN</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- 5. CHECKOUT MODAL -->
+  <div class="modal-overlay" id="modal-checkout" style="display: none;">
+    <div class="modal-container modal-xl">
+      <button class="modal-close-btn" onclick="app.closeModal('modal-checkout')" title="Đóng">&times;</button>
+      <div class="modal-header">
+        <div class="modal-header-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        </div>
+        <h3 class="modal-title">THANH TOÁN ĐƠN HÀNG</h3>
+        <p class="modal-subtitle">Vui lòng kiểm tra lại thông tin nhận hàng và phương thức thanh toán</p>
+      </div>
+
+      <div class="checkout-layout">
+        <!-- Col 1: Customer Form & Shipping -->
+        <div class="checkout-form-column">
+          <form id="checkout-form" onsubmit="return false;">
+            <!-- Customer Information -->
+            <div class="checkout-section">
+              <h4 class="checkout-section-title">
+                <span class="step-num">1</span> Thông tin người nhận
+              </h4>
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label for="chk-name">Họ và tên người nhận <span class="required">*</span></label>
+                  <input type="text" id="chk-name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label for="chk-phone">Số điện thoại liên hệ <span class="required">*</span></label>
+                  <input type="tel" id="chk-phone" class="form-control" required>
+                </div>
+              </div>
+            </div>
+
+            <!-- Shipping Address Selection -->
+            <div class="checkout-section">
+              <h4 class="checkout-section-title">
+                <span class="step-num">2</span> Địa chỉ giao hàng
+              </h4>
+              
+              <div class="address-options">
+                <!-- Option 1: Default address -->
+                <label class="radio-card" id="label-address-default">
+                  <input type="radio" name="chk-address-type" value="default" id="radio-addr-default" checked onchange="app.handleAddressTypeChange()">
+                  <div class="radio-card-content">
+                    <div class="radio-card-title">Sử dụng địa chỉ mặc định</div>
+                    <div class="radio-card-desc" id="chk-default-address-preview">
+                      Đang tải thông tin địa chỉ tài khoản...
+                    </div>
+                  </div>
+                </label>
+
+                <!-- Option 2: New address -->
+                <label class="radio-card" id="label-address-new">
+                  <input type="radio" name="chk-address-type" value="new" id="radio-addr-new" onchange="app.handleAddressTypeChange()">
+                  <div class="radio-card-content">
+                    <div class="radio-card-title">Giao đến địa chỉ mới khác</div>
+                    <div class="radio-card-desc">Nhập địa chỉ nhận hàng khác với địa chỉ tài khoản của bạn</div>
+                  </div>
+                </label>
+              </div>
+
+              <!-- New Address Form Fields (toggleable) -->
+              <div class="new-address-fields" id="chk-new-address-fields" style="display: none;">
+                <div class="form-group">
+                  <label for="chk-address">Địa chỉ nhận hàng (Số nhà, tên đường) <span class="required">*</span></label>
+                  <input type="text" id="chk-address" class="form-control" placeholder="Ví dụ: 1283 Phạm Thế Hiển">
+                </div>
+                <div class="form-group">
+                  <label for="chk-ward">Phường <span class="required">*</span></label>
+                  <input type="text" id="chk-ward" class="form-control" placeholder="Ví dụ: Phường 5">
+                </div>
+                <div class="form-group">
+                  <label for="chk-city">Tỉnh / Thành phố <span class="required">*</span></label>
+                  <input type="text" id="chk-city" class="form-control" placeholder="Ví dụ: TP. Hồ Chí Minh">
+                </div>
+              </div>
+            </div>
+
+            <!-- Payment Method Selection -->
+            <div class="checkout-section">
+              <h4 class="checkout-section-title">
+                <span class="step-num">3</span> Phương thức thanh toán
+              </h4>
+              <div class="payment-options">
+                <label class="radio-card">
+                  <input type="radio" name="chk-payment-method" value="COD" checked onchange="app.handlePaymentMethodChange()">
+                  <div class="radio-card-content">
+                    <div class="radio-card-title">
+                      <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                      Thanh toán khi nhận hàng (COD)
+                    </div>
+                    <div class="radio-card-desc">Được mở hộp đồng kiểm hàng hóa cùng shipper trước khi trả tiền mặt.</div>
+                  </div>
+                </label>
+
+                <label class="radio-card">
+                  <input type="radio" name="chk-payment-method" value="Banking" onchange="app.handlePaymentMethodChange()">
+                  <div class="radio-card-content">
+                    <div class="radio-card-title">
+                      <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                      Chuyển khoản ngân hàng (Banking 24/7)
+                    </div>
+                    <div class="radio-card-desc">Chuyển khoản qua số tài khoản cửa hàng trước khi giao hàng.</div>
+                  </div>
+                </label>
+              </div>
+
+              <!-- Banking Info Panel (shows if Banking selected) -->
+              <div class="banking-info-card" id="banking-info-panel" style="display: none;">
+                <div class="banking-header">
+                  <svg class="icon-sm text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  <strong>THÔNG TIN TÀI KHOẢN NGÂN HÀNG RAINBUSHOP</strong>
+                </div>
+                <div class="banking-details">
+                  <div class="bank-row">
+                    <span>Ngân hàng:</span>
+                    <strong>Vietcombank (VCB)</strong>
+                  </div>
+                  <div class="bank-row">
+                    <span>Số tài khoản:</span>
+                    <strong class="bank-acc-num">1234567890</strong>
+                  </div>
+                  <div class="bank-row">
+                    <span>Chủ tài khoản:</span>
+                    <strong>RAINBUSHOP</strong>
+                  </div>
+                  <div class="bank-row">
+                    <span>Nội dung CK:</span>
+                    <strong id="banking-syntax-preview">[Tên KH] [Số Điện Thoại]</strong>
+                  </div>
+                </div>
+                <p class="banking-note">* Đơn hàng sẽ được xử lý và giao ngay sau khi hệ thống nhận được thông báo chuyển tiền.</p>
+              </div>
+            </div>
+
+            <!-- Notes -->
+            <div class="checkout-section">
+              <label for="chk-notes" class="checkout-section-title" style="margin-bottom: 8px;">Ghi chú đơn hàng (không bắt buộc)</label>
+              <textarea id="chk-notes" class="form-control" rows="2" placeholder="Ví dụ: Giao giờ hành chính, gọi trước khi giao 15 phút..."></textarea>
+            </div>
+          </form>
+        </div>
+
+        <!-- Col 2: Order Summary -->
+        <div class="checkout-summary-column">
+          <div class="checkout-summary-card">
+            <h4 class="summary-title">TỔNG QUAN ĐƠN HÀNG</h4>
+            <div class="summary-items-list" id="checkout-items-list">
+              <!-- Rendered by app.js -->
+            </div>
+
+            <div class="summary-totals">
+              <div class="summary-total-row">
+                <span>Tạm tính:</span>
+                <span id="chk-subtotal-val">0₫</span>
+              </div>
+              <div class="summary-total-row">
+                <span>Phí vận chuyển:</span>
+                <span class="text-success">MIỄN PHÍ</span>
+              </div>
+              <div class="summary-total-divider"></div>
+              <div class="summary-total-row final">
+                <span>Tổng thanh toán:</span>
+                <strong class="total-price" id="chk-grandtotal-val">0₫</strong>
+              </div>
+            </div>
+
+            <div class="form-alert error" id="checkout-error-msg" style="display: none; margin-top: 15px;"></div>
+
+            <button type="button" class="btn btn-primary btn-block btn-lg" id="btn-confirm-order" onclick="app.submitOrder()">
+              XÁC NHẬN ĐẶT HÀNG
+            </button>
+            <p class="terms-note">Bằng việc bấm xác nhận, quý khách đồng ý với các <a href="javascript:void(0)" onclick="app.showPolicyModal('exchange')">Chính sách mua hàng</a> của RainbuShop.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Yêu cầu: Chi tiết đơn hàng là 1 trang html riêng (order-detail.html), KHÔNG DÙNG POPUP -->
+
+  <!-- 7. ORDER HISTORY MODAL -->
+  <div class="modal-overlay" id="modal-order-history" style="display: none;">
+    <div class="modal-container modal-lg">
+      <button class="modal-close-btn" onclick="app.closeModal('modal-order-history')" title="Đóng">&times;</button>
+      <div class="modal-header">
+        <div class="modal-header-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <h3 class="modal-title">LỊCH SỬ ĐƠN HÀNG</h3>
+        <p class="modal-subtitle">Theo dõi trạng thái và chi tiết các đơn hàng bạn đã đặt</p>
+      </div>
+
+      <div class="order-history-body" id="order-history-list">
+        <!-- Rendered by app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. SIZE GUIDE MODAL -->
+  <div class="modal-overlay" id="modal-size-guide" style="display: none;">
+    <div class="modal-container modal-md">
+      <button class="modal-close-btn" onclick="app.closeModal('modal-size-guide')" title="Đóng">&times;</button>
+      <div class="modal-header">
+        <h3 class="modal-title">BẢNG QUY ĐỔI SIZE BÓNG RỔ</h3>
+        <p class="modal-subtitle">Hướng dẫn chuẩn xác để chọn size giày và trang phục bóng rổ</p>
+      </div>
+      <div class="size-guide-content">
+        <h4>1. Bảng quy đổi Size giày Nike &amp; Jordan</h4>
+        <div class="table-responsive">
+          <table class="size-table">
+            <thead>
+              <tr><th>EU</th><th>US (Nam)</th><th>CM (Chiều dài bàn chân)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>40</td><td>7.0</td><td>25.0 cm</td></tr>
+              <tr><td>41</td><td>8.0</td><td>26.0 cm</td></tr>
+              <tr><td>42</td><td>8.5</td><td>26.5 cm</td></tr>
+              <tr><td>42.5</td><td>9.0</td><td>27.0 cm</td></tr>
+              <tr><td>43</td><td>9.5</td><td>27.5 cm</td></tr>
+              <tr><td>44</td><td>10.0</td><td>28.0 cm</td></tr>
+              <tr><td>45</td><td>11.0</td><td>29.0 cm</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="guide-tip">
+          <p><strong>Mẹo chọn size giày bóng rổ:</strong> Đối với các dòng ôm khít như Kobe hoặc LeBron và chân bạn có bề ngang (chân bè), nên chọn <em>tăng lên nửa size (0.5 size)</em> để mang vớ dày thoải mái nhất!</p>
+        </div>
+
+        <h4 style="margin-top: 20px;">2. Bảng size áo thi đấu bóng rổ NBA</h4>
+        <div class="table-responsive">
+          <table class="size-table">
+            <thead>
+              <tr><th>Size Áo</th><th>Chiều cao</th><th>Cân nặng</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>S</td><td>1m60 - 1m68</td><td>55kg - 63kg</td></tr>
+              <tr><td>M</td><td>1m68 - 1m75</td><td>64kg - 72kg</td></tr>
+              <tr><td>L</td><td>1m75 - 1m82</td><td>73kg - 82kg</td></tr>
+              <tr><td>XL</td><td>1m80 - 1m88</td><td>83kg - 92kg</td></tr>
+              <tr><td>XXL</td><td>Trên 1m85</td><td>Trên 92kg</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. GENERAL POLICY MODAL -->
+  <div class="modal-overlay" id="modal-policy" style="display: none;">
+    <div class="modal-container modal-md">
+      <button class="modal-close-btn" onclick="app.closeModal('modal-policy')" title="Đóng">&times;</button>
+      <div class="modal-header">
+        <h3 class="modal-title" id="policy-modal-title">CHÍNH SÁCH RAINBUSHOP</h3>
+      </div>
+      <div class="policy-modal-body" id="policy-modal-content">
+        <!-- Rendered by app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= TOAST NOTIFICATION CONTAINER ================= -->
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <!-- SCRIPTS -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
