@@ -347,8 +347,25 @@
 
     if (!searchInput) return;
 
-    // YÊU CẦU BẮT BUỘC: Thanh tìm kiếm bình thường trong index.html KHÔNG CHẠY ĐƯỢC, KHÔNG TÌM KIẾM ĐƯỢC THIỆT
-    // Người dùng gõ chữ bình thường nhưng không thực hiện tìm kiếm / không lọc sản phẩm thiệt
+    function executeBasicSearch() {
+      const q = searchInput.value.trim();
+      state.basicSearchQuery = q;
+      state.currentPage = 1;
+      state.isAdvFilterActive = false; // Ưu tiên tìm kiếm thường
+      hideAdvancedSearchPanel();
+
+      if (searchClear) {
+        searchClear.style.display = q ? 'block' : 'none';
+      }
+
+      renderProducts();
+
+      const productSection = document.getElementById('product-section');
+      if (productSection && q) {
+        productSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
     searchInput.addEventListener('input', function () {
       const q = searchInput.value;
       if (searchClear) {
@@ -359,14 +376,17 @@
     if (searchForm) {
       searchForm.addEventListener('submit', function (e) {
         e.preventDefault();
-        // Không chạy lọc / không tìm kiếm thật
+        executeBasicSearch();
       });
     }
 
     if (searchClear) {
       searchClear.addEventListener('click', function () {
         searchInput.value = '';
+        state.basicSearchQuery = '';
         searchClear.style.display = 'none';
+        state.currentPage = 1;
+        renderProducts();
         searchInput.focus();
       });
     }

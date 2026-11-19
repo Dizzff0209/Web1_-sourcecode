@@ -709,11 +709,33 @@
         localStorage.setItem('orders', JSON.stringify(DEFAULT_ORDERS));
         localStorage.setItem('rainbushop_orders', JSON.stringify(DEFAULT_ORDERS));
       }
-      // Cart
-      if (forceReset || !localStorage.getItem(STORAGE_KEYS.CART)) {
-        localStorage.setItem(STORAGE_KEYS.CART, JSON.stringify([]));
-        localStorage.setItem('cart', JSON.stringify([]));
-        localStorage.setItem('rainbushop_cart', JSON.stringify([]));
+      // Cart (Có sẵn 2 sản phẩm mẫu tượng trưng để test giao diện mua hàng)
+      var sampleCart = [
+        {
+          productId: 'prod_01',
+          productName: "Nike Kobe 6 Protro 'Reverse Grinch'",
+          image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80',
+          price: 4850000,
+          size: '42.5',
+          quantity: 1
+        },
+        {
+          productId: 'prod_08',
+          productName: "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+          image: 'https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=800&q=80',
+          price: 5200000,
+          size: '42',
+          quantity: 1
+        }
+      ];
+
+      var curCart = null;
+      try { curCart = JSON.parse(localStorage.getItem(STORAGE_KEYS.CART) || localStorage.getItem('cart') || localStorage.getItem('rainbushop_cart')); } catch(e){}
+      if (forceReset || !curCart || !Array.isArray(curCart) || curCart.length === 0) {
+        var strCart = JSON.stringify(sampleCart);
+        localStorage.setItem(STORAGE_KEYS.CART, strCart);
+        localStorage.setItem('cart', strCart);
+        localStorage.setItem('rainbushop_cart', strCart);
       }
     } catch (e) {
       console.warn('initStorage error:', e);
