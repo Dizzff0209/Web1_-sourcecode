@@ -1539,29 +1539,9 @@ function buildForwardOnlyStatusSelect(orderId, currentStatus) {
 }
 
 function updateOrderStatus(orderId) {
-  var selectEl = document.getElementById('order-status-select-' + orderId);
-  if (!selectEl) return;
-
-  var newStatus = selectEl.value;
-  var orders = getOrders();
-  var order = orders.find(function(o) { return o.id === orderId; });
-
-  if (!order) return;
-
-  if (newStatus === order.status || newStatus.indexOf('(Hiện tại)') !== -1) {
-    alert('Vui lòng chọn trạng thái mới cần chuyển tiếp trong danh sách!');
-    return;
-  }
-
-  var confirmed = confirm('Xác nhận cập nhật trạng thái đơn hàng #' + (order.orderId || order.id) + ' sang: "' + newStatus + '"?');
-  if (!confirmed) return;
-
-  order.status = newStatus;
-  saveOrders(orders);
-
+  // Yêu cầu: Quản lý đơn hàng trong admin làm tương tự sản phẩm và người dùng (chỉ là giao diện không chạy được, lưu trạng thái thì về lại như lúc chưa lưu)
   renderOrders();
   refreshDashboardData();
-  showToast('Đã cập nhật đơn hàng #' + (order.orderId || order.id) + ' thành "' + newStatus + '"', 'success');
 }
 
 // --- ORDER FILTERING (0.75đ) ---
@@ -1679,13 +1659,15 @@ function resetOrderFilters() {
 
 // --- CHI TIẾT ĐƠN HÀNG LÀ 1 TRANG HTML RIÊNG (KHÔNG DÙNG POPUP) ---
 function viewOrderDetail(orderId) {
+  // Yêu cầu: Xem chi tiết từng đơn hàng 1 thì nhảy về cùng 1 trang order thôi (ví dụ đơn ord_sample_01)
+  var defaultOrderId = 'ord_sample_01';
   try {
-    sessionStorage.setItem('current_view_order_id', orderId);
-    localStorage.setItem('current_view_order_id', orderId);
+    sessionStorage.setItem('current_view_order_id', defaultOrderId);
+    localStorage.setItem('current_view_order_id', defaultOrderId);
   } catch (e) {}
   
-  // Chuyển hướng sang trang HTML riêng order-detail.html với tham số orderId
-  window.location.href = 'order-detail.html?id=' + encodeURIComponent(orderId) + '&from=admin';
+  // Chuyển hướng sang trang HTML riêng order-detail.html cố định về cùng 1 đơn hàng
+  window.location.href = 'order-detail.html?id=' + encodeURIComponent(defaultOrderId) + '&from=admin';
 }
 
 

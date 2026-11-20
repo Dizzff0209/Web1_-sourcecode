@@ -1145,17 +1145,11 @@
       address = currentUser.address || '1283 Phạm Thế Hiển, Phường 5';
       city = currentUser.city || 'TP. Hồ Chí Minh';
     } else {
-      const street = document.getElementById('chk-address')?.value.trim();
-      const ward = document.getElementById('chk-ward')?.value.trim();
-      city = document.getElementById('chk-city')?.value.trim();
+      const street = document.getElementById('chk-address')?.value.trim() || '1283 Phạm Thế Hiển';
+      const ward = document.getElementById('chk-ward')?.value.trim() || 'Phường 5';
+      city = document.getElementById('chk-city')?.value.trim() || 'TP. Hồ Chí Minh';
 
-      if (!street || !city) {
-        if (errorMsg) {
-          errorMsg.textContent = 'Vui lòng điền đầy đủ thông tin địa chỉ, phường và tỉnh/thành phố nhận hàng mới.';
-          errorMsg.style.display = 'block';
-        }
-        return;
-      }
+      // Yêu cầu: Bỏ luôn ràng buộc "Vui lòng điền đầy đủ thông tin địa chỉ, phường và tỉnh/thành phố nhận hàng mới", để nó thanh toán luôn
       address = ward ? (street + ', ' + (ward.toLowerCase().startsWith('phường') ? ward : 'Phường ' + ward)) : street;
     }
 
@@ -1173,13 +1167,13 @@
 
     const formattedDate = `${yyyy}-${mm}-${dd} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
 
-    // Construct Order Object
+    // Construct Order Object (Mô phỏng - Yêu cầu: Không được lưu gì hết vào danh sách đơn hàng)
     const newOrder = {
       id: window.generateId(),
       orderId: orderId,
       userId: currentUser.id,
-      customerName: name,
-      phone: phone,
+      customerName: name || currentUser.fullName || 'Khách hàng',
+      phone: phone || currentUser.phone || '0901234567',
       address: address,
       city: city,
       items: JSON.parse(JSON.stringify(cart)),
@@ -1189,11 +1183,7 @@
       orderDate: formattedDate
     };
 
-    // Save to orders array in localStorage
-    const orders = window.getOrders() || [];
-    orders.unshift(newOrder);
-    window.saveOrders(orders);
-
+    // Yêu cầu: KHÔNG ĐƯỢC LƯU GÌ HẾT (không lưu vào orders trong localStorage)
     // Clear Cart
     window.saveCart([]);
     updateCartUI();
@@ -1201,7 +1191,7 @@
     // Close checkout modal
     closeModal('modal-checkout');
 
-    // Yêu cầu: Chi tiết đơn hàng phải là 1 trang html riêng, không dùng popup
+    // Chi tiết đơn hàng chuyển sang trang riêng order-detail.html
     try {
       sessionStorage.setItem('current_view_order_id', newOrder.id);
       localStorage.setItem('current_view_order_id', newOrder.id);
@@ -1292,12 +1282,71 @@
     const container = document.getElementById('order-history-list');
     if (!container) return;
 
-    const allOrders = window.getOrders() || [];
-    // Filter orders belonging to currentUser
-    const userOrders = allOrders.filter(function (ord) {
-      return ord.userId === currentUser.id ||
-             (ord.phone && ord.phone === currentUser.phone);
-    });
+    // Yêu cầu: Trong phần lịch sử đơn hàng thì để sẵn 2-3 cái đơn hàng mẫu để thầy test, và không được lưu gì hết
+    const sampleHistoryOrders = [
+      {
+        id: 'ord_sample_01',
+        orderId: 'ORD-20261118-001',
+        orderDate: '2026-11-18 10:30',
+        status: 'Đã giao thành công',
+        totalAmount: 10050000,
+        address: '1283 Phạm Thế Hiển, Phường 5',
+        city: 'TP. Hồ Chí Minh',
+        paymentMethod: 'COD',
+        items: [
+          {
+            productName: "Nike Kobe 6 Protro 'Reverse Grinch'",
+            size: '42.5',
+            price: 4850000,
+            quantity: 1
+          },
+          {
+            productName: "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+            size: '42',
+            price: 5200000,
+            quantity: 1
+          }
+        ]
+      },
+      {
+        id: 'ord_sample_02',
+        orderId: 'ORD-20261119-002',
+        orderDate: '2026-11-19 14:15',
+        status: 'Đã xác nhận',
+        totalAmount: 3950000,
+        address: '1283 Phạm Thế Hiển, Phường 5',
+        city: 'TP. Hồ Chí Minh',
+        paymentMethod: 'Banking',
+        items: [
+          {
+            productName: "Nike LeBron 21 'Akoya'",
+            size: '42',
+            price: 3950000,
+            quantity: 1
+          }
+        ]
+      },
+      {
+        id: 'ord_sample_03',
+        orderId: 'ORD-20261120-003',
+        orderDate: '2026-11-20 09:00',
+        status: 'Chưa xác nhận',
+        totalAmount: 1450000,
+        address: '1283 Phạm Thế Hiển, Phường 5',
+        city: 'TP. Hồ Chí Minh',
+        paymentMethod: 'COD',
+        items: [
+          {
+            productName: 'Banh Bóng Rổ Molten BG4500 Da PU Tiêu Chuẩn FIBA',
+            size: 'Size 7',
+            price: 1450000,
+            quantity: 1
+          }
+        ]
+      }
+    ];
+
+    const userOrders = sampleHistoryOrders;
 
     if (userOrders.length === 0) {
       container.innerHTML = `
@@ -1481,34 +1530,24 @@
   }
 
   function saveUserProfile() {
+    // Yêu cầu: Trong phần thông tin cá nhân của tài khoản ở index, nếu cập nhật thông tin bất cứ cái gì thì đều cũng quay về thông tin như ban đầu
     const currentUser = window.getCurrentUser();
     if (!currentUser) return;
 
-    const fullName = document.getElementById('profile-fullname')?.value.trim() || currentUser.fullName;
-    const phone = document.getElementById('profile-phone')?.value.trim() || currentUser.phone;
-    const city = document.getElementById('profile-city')?.value.trim() || currentUser.city;
-    const address = document.getElementById('profile-address')?.value.trim() || currentUser.address;
+    // Không lưu thông tin mới, nạp lại thông tin cũ vào form và đóng modal
+    const uInput = document.getElementById('profile-username');
+    const nInput = document.getElementById('profile-fullname');
+    const pInput = document.getElementById('profile-phone');
+    const cInput = document.getElementById('profile-city');
+    const aInput = document.getElementById('profile-address');
 
-    currentUser.fullName = fullName;
-    currentUser.phone = phone;
-    currentUser.city = city;
-    currentUser.address = address;
+    if (uInput) uInput.value = currentUser.username || '';
+    if (nInput) nInput.value = currentUser.fullName || '';
+    if (pInput) pInput.value = currentUser.phone || '';
+    if (cInput) cInput.value = currentUser.city || 'TP. Hồ Chí Minh';
+    if (aInput) aInput.value = currentUser.address || '';
 
-    // Save to users list
-    const users = window.getUsers() || [];
-    const idx = users.findIndex(function (u) {
-      return (u.id === currentUser.id) || ((u.username || '').toLowerCase() === (currentUser.username || '').toLowerCase());
-    });
-    if (idx !== -1) {
-      users[idx] = Object.assign({}, users[idx], currentUser);
-      window.saveUsers(users);
-    }
-
-    // Save current user session
-    window.setCurrentUser(currentUser);
-    updateUserAreaUI();
     closeModal('modal-user-profile');
-    showToast('Đã lưu cập nhật thông tin cá nhân thành công!', 'success');
   }
 
   function handleLogout() {

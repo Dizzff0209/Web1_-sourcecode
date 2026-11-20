@@ -1198,9 +1198,28 @@
           buildAdminStatusSelect(status);
         }
 
-        // Render Items Table
+        // Render Items Table (Yêu cầu: Không làm đúng từng sản phẩm có trong đơn, lấy cùng 1 đơn 2 sản phẩm mẫu ở index)
         var tbody = document.getElementById('order-items-tbody');
-        var items = order.items || [];
+        var sampleItems = [
+          {
+            name: "Nike Kobe 6 Protro 'Reverse Grinch'",
+            sku: 'KB6-RG-01',
+            price: 4850000,
+            quantity: 1,
+            size: '42.5',
+            image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80'
+          },
+          {
+            name: "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+            sku: 'AJ1-CHI-08',
+            price: 5200000,
+            quantity: 1,
+            size: '42',
+            image: 'https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=800&q=80'
+          }
+        ];
+
+        var items = sampleItems;
         document.getElementById('items-count-badge').textContent = items.length + ' sản phẩm';
 
         var rowsHtml = '';
@@ -1235,13 +1254,9 @@
           '</tr>';
         });
 
-        if (items.length === 0) {
-          rowsHtml = '<tr><td colspan="6" style="text-align: center; padding: 30px; color: #94a3b8;">Không có dữ liệu sản phẩm trong đơn hàng này.</td></tr>';
-        }
-
         tbody.innerHTML = rowsHtml;
 
-        var finalTotal = order.totalAmount || totalAmount;
+        var finalTotal = totalAmount; // 10.050.000₫ tương ứng 2 sản phẩm mẫu
         document.getElementById('fin-subtotal').textContent = formatPrice(finalTotal);
         document.getElementById('fin-total').textContent = formatPrice(finalTotal);
       }
@@ -1326,37 +1341,10 @@
       }
 
       window.handleUpdateStatus = function () {
-        if (!currentOrder) return;
-        var sel = document.getElementById('select-update-status');
-        if (!sel) return;
-
-        var nextStatus = sel.value;
-        if (!nextStatus || nextStatus === currentOrder.status || nextStatus.indexOf('Hiện tại') !== -1 || nextStatus.indexOf('Đã khóa') !== -1) {
-          alert('Vui lòng chọn trạng thái tiếp theo cần cập nhật!');
-          return;
+        // Yêu cầu: Lưu trạng thái thì về lại như lúc chưa lưu (chỉ là giao diện mô phỏng không chạy được)
+        if (currentOrder) {
+          renderOrderData(currentOrder, true);
         }
-
-        var confirmed = confirm('Xác nhận cập nhật trạng thái đơn hàng #' + (currentOrder.orderId || currentOrder.id) + ' sang: "' + nextStatus + '"?');
-        if (!confirmed) return;
-
-        currentOrder.status = nextStatus;
-
-        // Save back to orders
-        var allOrders = (typeof window.getOrders === 'function') ? window.getOrders() : ordersList;
-        var idx = allOrders.findIndex(function (o) {
-          return (o.id && String(o.id) === String(currentOrder.id)) ||
-                 (o.orderId && String(o.orderId) === String(currentOrder.orderId));
-        });
-
-        if (idx !== -1) {
-          allOrders[idx].status = nextStatus;
-          if (typeof window.saveOrders === 'function') {
-            window.saveOrders(allOrders);
-          }
-        }
-
-        showToast('Đã cập nhật trạng thái đơn hàng thành: ' + nextStatus);
-        renderOrderData(currentOrder, true);
       };
 
       // Bootstrap on DOM ready
