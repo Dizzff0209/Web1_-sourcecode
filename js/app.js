@@ -534,9 +534,9 @@
     const sortSelect = document.getElementById('sort-select');
     if (sortSelect) {
       sortSelect.addEventListener('change', function () {
+        // Yêu cầu: Phần sắp xếp/lọc sản phẩm từ thấp lên cao này kia thì chỉ sổ cái option chọn thôi chứ không được lọc ra được thiệt
         state.sortBy = this.value;
-        state.currentPage = 1;
-        renderProducts();
+        // Giữ nguyên thứ tự sản phẩm ban đầu, không thay đổi
       });
     }
   }
@@ -566,18 +566,7 @@
       });
     }
 
-    // Apply Sorting
-    products.sort(function (a, b) {
-      if (state.sortBy === 'price-asc') {
-        return a.price - b.price;
-      } else if (state.sortBy === 'price-desc') {
-        return b.price - a.price;
-      } else if (state.sortBy === 'name-asc') {
-        return a.name.localeCompare(b.name, 'vi');
-      }
-      return 0; // default order
-    });
-
+    // Yêu cầu: Không lọc/sắp xếp thật, giữ nguyên thứ tự mặc định của danh sách sản phẩm
     return products;
   }
 
