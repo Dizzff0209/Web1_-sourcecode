@@ -974,7 +974,13 @@ button, input, select, textarea {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
+.action-buttons-wrap .btn {
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .empty-state {

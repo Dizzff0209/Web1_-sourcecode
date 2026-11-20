@@ -551,7 +551,20 @@ function checkAuthStatus() {
 
     // Load and refresh current view
     populateCategoryDropdowns();
-    refreshDashboardData();
+    
+    // Yêu cầu: Nếu load lại thì nó vẫn ở chỗ tab đó (người dùng, đơn hàng, thống kê, sản phẩm...) chứ không quay lại chỗ tổng quan
+    var savedTab = 'dashboard';
+    try {
+      var hashTab = (window.location.hash || '').replace('#', '').trim();
+      var sessionTab = sessionStorage.getItem('admin_active_tab');
+      if (hashTab && ['dashboard', 'products', 'users', 'orders', 'stats'].indexOf(hashTab) !== -1) {
+        savedTab = hashTab;
+      } else if (sessionTab && ['dashboard', 'products', 'users', 'orders', 'stats'].indexOf(sessionTab) !== -1) {
+        savedTab = sessionTab;
+      }
+    } catch (e) {}
+
+    switchTab(savedTab);
   } else {
     // Not logged in -> Show login screen only
     if (loginScreen) loginScreen.style.display = 'flex';
@@ -642,6 +655,14 @@ function handleAdminLogout() {
 // ==============================================================================
 
 function switchTab(tabId) {
+  // Lưu tab hiện tại vào sessionStorage & URL hash để khi load lại trang vẫn ở đúng tab đó
+  try {
+    sessionStorage.setItem('admin_active_tab', tabId);
+    if (window.location.hash !== '#' + tabId) {
+      window.location.hash = tabId;
+    }
+  } catch (e) {}
+
   // Update sidebar active link
   var navLinks = document.querySelectorAll('.sidebar-nav .nav-link');
   navLinks.forEach(function(link) {
@@ -1387,7 +1408,21 @@ function submitEditUser() {
   renderUsers();
 }
 
-// --- LOCK / UNLOCK USER ---
+// --- RESET TRẠNG THÁI TÀI KHOẢN VỀ BAN ĐẦU KHI LOAD LẠI TRANG ---
+(function resetAccountStatusOnPageLoad() {
+  try {
+    var rawUsers = localStorage.getItem('rainbu_users') || localStorage.getItem('users') || localStorage.getItem('rainbushop_users');
+    if (rawUsers) {
+      var userList = JSON.parse(rawUsers);
+      if (Array.isArray(userList)) {
+        userList.forEach(function(u) {
+          u.isLocked = false; // Luôn mở khóa về trạng thái hoạt động ban đầu khi load lại trang
+        });
+        saveUsers(userList);
+      }
+    }
+  } catch (e) {}
+})();
 function toggleLockUser(userId) {
   var users = getUsers();
   var user = users.find(function(u) { return u.id === userId; });
